@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 
 namespace CRUD.Pages.Clients
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         public ClientInfo clientInfo = new ClientInfo();

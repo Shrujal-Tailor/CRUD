@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using sun.security.util;
@@ -5,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace CRUD.Pages.Clients
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         public ClientInfo clientInfo = new ClientInfo();

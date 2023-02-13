@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -5,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace CRUD.Pages.Products
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         public List<ProductInfo> listProduct = new List<ProductInfo>();
