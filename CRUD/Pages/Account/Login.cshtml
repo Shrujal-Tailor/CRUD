@@ -12,7 +12,7 @@
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
 
-		<form action="">
+		<form>
 			<h1>Create Account</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fa fa-facebook"></i></a>
@@ -27,7 +27,7 @@
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="">
+		<form method="post">
 			<h1>Sign In</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fa fa-facebook"></i></a>
@@ -35,11 +35,11 @@
 				<a href="#" class="social"><i class="fa fa-linkedin"></i></a>
 			</div>
 			<span>or use your account</span>
-			<input type="text" name="email" placeholder="Email">
-			<input type="password" name="password" placeholder="Password">
+			<input type="email" asp-for="Credential.Email" name="email" placeholder="Email">
+			<input type="password" asp-for="Credential.Password" name="password" placeholder="Password">
 			<a href="#">Forgot Your Password</a>
 
-			<button>Sign In</button>
+			<button type="submit">Sign In</button>
 		</form>
 	</div>
 	<div class="overlay-container">

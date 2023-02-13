@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 
 namespace CRUD.Pages.Clients
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         public List<ClientInfo> listClients = new List<ClientInfo>();
