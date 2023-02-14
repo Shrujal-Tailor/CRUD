@@ -2,7 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using sun.security.util;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json.Serialization;
 
 namespace CRUD.Pages.Clients
 {
@@ -10,6 +13,8 @@ namespace CRUD.Pages.Clients
     public class CreateModel : PageModel
     {
         public ClientInfo clientInfo = new ClientInfo();
+        [BindProperty]
+        public Details Details { get; set; }
         password EncryptData = new password();
         public String errorMessage = "";
         public String successMessage = "";
@@ -19,17 +24,17 @@ namespace CRUD.Pages.Clients
 
         public void OnPost()
         {
-            clientInfo.name = Request.Form["name"];
-            clientInfo.email = Request.Form["email"];
-            clientInfo.password = Request.Form["password"];
-            clientInfo.phone = Request.Form["phone"];
-            clientInfo.address = Request.Form["address"];
+            clientInfo.name = Details.name;
+            clientInfo.email = Details.email;
+            clientInfo.password = Details.password;
+            clientInfo.phone = Details.phone;
+            clientInfo.address = Details.address;
 
-            if (clientInfo.name.Length == 0 || clientInfo.email.Length == 0 || clientInfo.password.Length == 0 || clientInfo.phone.Length == 0 || clientInfo.address.Length == 0)
+            /*if (clientInfo.name.Length == 0 || clientInfo.email.Length == 0 || clientInfo.password.Length == 0 || clientInfo.phone.Length == 0 || clientInfo.address.Length == 0)
             {
                 errorMessage = "All the fields are required";
                 return;
-            }
+            }*/
 
             //save the new data intu database
 
@@ -65,5 +70,21 @@ namespace CRUD.Pages.Clients
             successMessage = "New Client Added Correctly";
             Response.Redirect("/Clients/Index");
         }
+    }
+    public class Details
+    {
+        [Required]
+        public string name { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string email { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string password { get; set; }
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        public string phone { get; set; }
+        [Required]
+        public string address { get; set; }
     }
 }

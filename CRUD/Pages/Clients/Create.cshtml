@@ -17,31 +17,31 @@
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Name</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="name" value="@Model.clientInfo.name" />
+            <input type="text" class="form-control" name="name" asp-for="Details.name" value="@Model.clientInfo.name" />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Email</label>
         <div class="col-sm-6">
-            <input type="email" class="form-control" name="email" value="@Model.clientInfo.email" />
+            <input type="email" class="form-control" name="email" asp-for="Details.email" value="@Model.clientInfo.email" />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Password</label>
         <div class="col-sm-6">
-            <input type="password" class="form-control" name="password" value="@Model.clientInfo.password" />
+            <input type="password" class="form-control" name="password" asp-for="Details.password" value="@Model.clientInfo.password" />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Phone</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="phone" value="@Model.clientInfo.phone" />
+            <input type="text" class="form-control" name="phone" asp-for="Details.phone" value="@Model.clientInfo.phone" />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Address</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="address" value="@Model.clientInfo.address" />
+            <input type="text" class="form-control" name="address" asp-for="Details.address" value="@Model.clientInfo.address" />
         </div>
     </div>
 

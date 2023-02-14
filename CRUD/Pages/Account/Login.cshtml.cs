@@ -11,23 +11,54 @@ using System.Security.Claims;
 
 namespace CRUD.Pages.Access
 {
-    public class IndexModel : PageModel
+    public class LoginModel : PageModel
     {
+        public ClientInfo clientInfo = new ClientInfo();
         [BindProperty]
         public Credential Credential { get; set; }
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            return Page();
         }
         public async Task<IActionResult> OnPostAsync() 
         {
+            string email = Credential.email;
+            try
+            {
+                String connectionString = "Data Source=.\\;Initial Catalog=CRUD;Integrated Security=True";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    String sql = "SELECT * FROM clients WHERE email = @email";
+                    using (SqlCommand command
+                        = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@email", email);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                clientInfo.id = "" + reader.GetInt32(0);
+                                clientInfo.name = reader.GetString(1);
+                                clientInfo.email = reader.GetString(2);
+                                clientInfo.password = reader.GetString(3);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                /*errorMessage = ex.Message;*/
+            }
+
             if (!ModelState.IsValid) return Page();
 
-            if (Credential.Email == "admin@outlook.com" && Credential.Password == "password")
+            if (Credential.email == clientInfo.email && Credential.Password == clientInfo.password)
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Email, Credential.Email),
-                    new Claim(ClaimTypes.Name, "Admin")
+                var claims = new List<Claim> {
+                    new Claim(ClaimTypes.Email, Credential.email),
+                    new Claim(ClaimTypes.Name, clientInfo.name)
                 };
                 var identity = new ClaimsIdentity(claims, "MyCookieAuth");
                 ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
@@ -42,7 +73,7 @@ namespace CRUD.Pages.Access
     public class Credential
     {
         [Required]
-        public string Email { get; set; }
+        public string email { get; set; }
         
         [Required]
         [DataType(DataType.Password)]

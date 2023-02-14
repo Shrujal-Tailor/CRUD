@@ -1,5 +1,5 @@
 ﻿@page
-@model CRUD.Pages.Access.IndexModel
+@model CRUD.Pages.Access.LoginModel
 @{
 	Layout = null;
 }
@@ -35,7 +35,7 @@
 				<a href="#" class="social"><i class="fa fa-linkedin"></i></a>
 			</div>
 			<span>or use your account</span>
-			<input type="email" asp-for="Credential.Email" name="email" placeholder="Email">
+			<input type="email" asp-for="Credential.email" name="email" placeholder="Email">
 			<input type="password" asp-for="Credential.Password" name="password" placeholder="Password">
 			<a href="#">Forgot Your Password</a>
 
