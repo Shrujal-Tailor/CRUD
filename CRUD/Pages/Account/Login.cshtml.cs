@@ -16,6 +16,7 @@ namespace CRUD.Pages.Access
         public ClientInfo clientInfo = new ClientInfo();
         [BindProperty]
         public Credential Credential { get; set; }
+        password EncryptData = new password();
         public IActionResult OnGet()
         {
             return Page();
@@ -54,7 +55,7 @@ namespace CRUD.Pages.Access
 
             if (!ModelState.IsValid) return Page();
 
-            if (Credential.email == clientInfo.email && Credential.Password == clientInfo.password)
+            if (Credential.email == clientInfo.email && EncryptData.Encode(Credential.Password) == clientInfo.password)
             {
                 var claims = new List<Claim> {
                     new Claim(ClaimTypes.Email, Credential.email),
