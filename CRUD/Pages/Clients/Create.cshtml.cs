@@ -73,6 +73,7 @@ namespace CRUD.Pages.Clients
     }
     public class Details
     {
+        public string id { get; set; }
         [Required]
         public string name { get; set; }
         [Required]

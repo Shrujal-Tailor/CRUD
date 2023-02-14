@@ -17,31 +17,31 @@
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Name</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="name" value="@Model.productInfo.name" />
+            <input type="text" class="form-control" name="name" asp-for="Details.name" value="@Model.productInfo.name" />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Category</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="category" value="@Model.productInfo.category" />
+            <input type="text" class="form-control" name="category" asp-for="Details.category" value="@Model.productInfo.category" />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Description</label>
         <div class="col-sm-6">
-            <textarea class="form-control" name="description" maxlength="500" rows="4" required>@Model.productInfo.description</textarea>
+            <textarea class="form-control" name="description" asp-for="Details.description" maxlength="500" rows="4" required>@Model.productInfo.description</textarea>
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Quantity</label>
         <div class="col-sm-6">
-            <input type="number" min="0" max="100" class="form-control" name="quantity" value="@Model.productInfo.quantity" required />
+            <input type="number" min="0" max="100" class="form-control" name="quantity" asp-for="Details.quantity" value="@Model.productInfo.quantity" required />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Image</label>
         <div class="col-sm-6">
-            <input type="file" accept=".jpeg,.png" class="form-control" name="image" value="@Model.productInfo.image" required />
+            <input type="file" accept=".jpeg,.png" class="form-control" name="image" asp-for="Details.image" value="@Model.productInfo.image" required />
         </div>
     </div>
 

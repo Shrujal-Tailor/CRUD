@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 
 namespace CRUD.Pages.Clients
@@ -11,6 +12,8 @@ namespace CRUD.Pages.Clients
         public ClientInfo clientInfo = new ClientInfo();
         public String errorMessage = "";
         public String successMessage = "";
+        [BindProperty]
+        public Details Details { get; set; }
         public void OnGet()
         {
             String id = Request.Query["id"];
@@ -48,17 +51,17 @@ namespace CRUD.Pages.Clients
 
         public void OnPost()
         {
-            clientInfo.id = Request.Form["id"];
-            clientInfo.name = Request.Form["name"];
-            clientInfo.email = Request.Form["email"];
-            clientInfo.phone = Request.Form["phone"];
-            clientInfo.address = Request.Form["address"];
+            clientInfo.id = Details.id;
+            clientInfo.name = Details.name;
+            clientInfo.email = Details.email;
+            clientInfo.phone = Details.phone;
+            clientInfo.address = Details.address;
 
-            if (clientInfo.name.Length == 0 || clientInfo.email.Length == 0 || clientInfo.phone.Length == 0 || clientInfo.address.Length == 0)
+            /*if (clientInfo.name.Length == 0 || clientInfo.email.Length == 0 || clientInfo.phone.Length == 0 || clientInfo.address.Length == 0)
             {
                 errorMessage = "All the fields are required";
                 return;
-            }
+            }*/
 
             try
             {
@@ -88,4 +91,21 @@ namespace CRUD.Pages.Clients
             Response.Redirect("/Clients/Index");
         }
     }
+    /*public class Detail
+    {
+        public string id { get; set; }
+        [Required]
+        public string name { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string email { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string password { get; set; }
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        public string phone { get; set; }
+        [Required]
+        public string address { get; set; }
+    }*/
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 
 namespace CRUD.Pages.Products
@@ -11,16 +12,18 @@ namespace CRUD.Pages.Products
         public ProductInfo productInfo = new ProductInfo();
         public String errorMessage = "";
         public String successMessage = "";
+        [BindProperty]
+        public Details Details { get; set; }
         public void OnGet()
         {
         }
         public void OnPost()
         {
-            productInfo.name = Request.Form["name"];
-            productInfo.category = Request.Form["category"];
-            productInfo.description = Request.Form["description"];
-            productInfo.quantity = Request.Form["quantity"];
-            productInfo.image = Request.Form["image"];
+            productInfo.name = Details.id;
+            productInfo.category = Details.category;
+            productInfo.description = Details.description;
+            productInfo.quantity = Details.quantity;
+            productInfo.image = Details.image;
 
             if (productInfo.name.Length == 0 || productInfo.category.Length == 0 || productInfo.description.Length == 0 || productInfo.quantity.Length == 0)
             {
@@ -62,5 +65,18 @@ namespace CRUD.Pages.Products
             successMessage = "New Product Added Correctly";
             Response.Redirect("/Products/Index");
         }
+    }
+    public class Details
+    {
+        public string id { get; set; }
+        [Required]
+        public string name { get; set; }
+        [Required]
+        public string category { get;set; }
+        [Required]
+        public string description { get; set; }
+        [Required]
+        public string quantity { get; set; }
+        public string image { get; set; }
     }
 }

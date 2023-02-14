@@ -12,6 +12,8 @@ namespace CRUD.Pages.Products
         public ProductInfo productInfo = new ProductInfo();
         public String errorMessage = "";
         public String successMessage = "";
+        [BindProperty]
+        public Details Details { get; set; }
         public void OnGet()
         {
             String id = Request.Query["id"];
@@ -50,18 +52,18 @@ namespace CRUD.Pages.Products
 
         public void OnPost()
         {
-            productInfo.id = Request.Form["id"];
-            productInfo.name = Request.Form["name"];
-            productInfo.category = Request.Form["category"];
-            productInfo.description = Request.Form["description"];
-            productInfo.quantity = Request.Form["quantity"];
-            productInfo.image = Request.Form["image"];
+            productInfo.id = Details.id;
+            productInfo.name = Details.name;
+            productInfo.category = Details.category;
+            productInfo.description = Details.description;
+            productInfo.quantity = Details.quantity;
+            productInfo.image = Details.image;
 
-            if (productInfo.name.Length == 0 || productInfo.category.Length == 0 || productInfo.description.Length == 0 || productInfo.quantity.Length == 0 || productInfo.image.Length == 0)
+            /*if (productInfo.name.Length == 0 || productInfo.category.Length == 0 || productInfo.description.Length == 0 || productInfo.quantity.Length == 0 || productInfo.image.Length == 0)
             {
                 errorMessage = "All the fields are required";
                 return;
-            }
+            }*/
 
             try
             {
